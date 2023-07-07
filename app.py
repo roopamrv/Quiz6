@@ -51,7 +51,7 @@ def process():
         item = parts[1]
         with conn.cursor() as cursor:
             cursor.execute("INSERT INTO stock (item_name) VALUES (?)", item)
-            cursor.execute("INSERT INTO transactions (item_name) VALUES (?)", item)
+            cursor.execute("INSERT INTO transactions (item_name) VALUES (?)", str(parts[0])+" "+item)
             conn.commit()
     elif parts[0] == 'G':
         # Get item from inventory
@@ -87,4 +87,4 @@ def process():
     return 'Command processed successfully.'
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(port = 9899,debug=True)
